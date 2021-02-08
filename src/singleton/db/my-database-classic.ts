@@ -1,6 +1,11 @@
+interface User {
+  name: string;
+  age: number;
+}
 export class MyDatabaseClassic {
   // private static instance?: MyDatabaseClassic;
   private static instance?: MyDatabaseClassic | null = null;
+  private users: User[] = [];
 
   private constructor() {}
 
@@ -11,9 +16,23 @@ export class MyDatabaseClassic {
 
     return MyDatabaseClassic.instance;
   }
+
+  public add(user: User): void {
+    this.users.push(user);
+  }
+
+  public remove(index: number): void {
+    this.users.splice(index, 1);
+  }
+
+  public show(): void {
+    for (const user of this.users) {
+      console.log(user);
+    }
+  }
 }
 
-const db1 = MyDatabaseClassic.getInstance();
-const db2 = MyDatabaseClassic.getInstance();
+// const db1 = MyDatabaseClassic.getInstance();
+// const db2 = MyDatabaseClassic.getInstance();
 
-console.log(db1 === db2);
+// console.log(db1 === db2);
